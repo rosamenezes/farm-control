@@ -1,8 +1,11 @@
 package com.betrybe.agrix.controller;
 
 import com.betrybe.agrix.controller.dto.DtoCrop;
+import com.betrybe.agrix.controller.dto.DtoFertilizer;
 import com.betrybe.agrix.entities.Crop;
+import com.betrybe.agrix.entities.Fertilizer;
 import com.betrybe.agrix.service.CropService;
+import com.betrybe.agrix.service.exceptions.CropNotFoundException;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +48,18 @@ public class CropController {
   public ResponseEntity<DtoCrop> getCropById(@PathVariable int id) {
     Crop cropById = cropService.getCropById(id);
     return ResponseEntity.status(HttpStatus.OK).body(DtoCrop.from(cropById));
+  }
+
+  /**
+   * get fertilizers from crops.
+   */
+  @GetMapping("/{cropId}/fertilizers")
+  public ResponseEntity<List<DtoFertilizer>> getFertilizersFromCrops(@PathVariable int cropId)
+      throws CropNotFoundException {
+    Crop crop = cropService.getCropById(cropId);
+    List<Fertilizer> fertilizer = crop.getFertilizers();
+    return ResponseEntity.status(HttpStatus.OK).body(fertilizer.stream()
+        .map(DtoFertilizer::from).toList());
   }
 
   /**
