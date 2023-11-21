@@ -13,8 +13,10 @@ public record DtoCrop(
     Integer farmId,
     LocalDate plantedDate,
     LocalDate harvestDate
-  )
-{
+) {
+  /**
+   * Converts an entity to a DTO.
+   */
   public static DtoCrop from(Crop crop) {
     return new DtoCrop(
         crop.getId(),
