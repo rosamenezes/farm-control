@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,5 +57,18 @@ public class CropController {
   ) {
     List<Crop> crops = cropService.searchCropsByHarvestDate(start, end);
     return ResponseEntity.status(HttpStatus.OK).body(crops.stream().map(DtoCrop::from).toList());
+  }
+
+  /**
+   * create crop.
+   */
+  @PostMapping("/{cropId}/fertilizers/{fertilizerId}")
+  public ResponseEntity<String> associateFertilizerToCrop(
+      @PathVariable int cropId, @PathVariable Long fertilizerId
+  ) {
+    cropService
+        .fertilizerToCrop(cropId, fertilizerId);
+    return ResponseEntity
+        .status(HttpStatus.CREATED).body("Fertilizante e plantação associados com sucesso!");
   }
 }
