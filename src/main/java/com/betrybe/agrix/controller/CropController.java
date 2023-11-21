@@ -3,6 +3,7 @@ package com.betrybe.agrix.controller;
 import com.betrybe.agrix.controller.dto.DtoCrop;
 import com.betrybe.agrix.entities.Crop;
 import com.betrybe.agrix.service.CropService;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -42,5 +44,17 @@ public class CropController {
   public ResponseEntity<DtoCrop> getCropById(@PathVariable int id) {
     Crop cropById = cropService.getCropById(id);
     return ResponseEntity.status(HttpStatus.OK).body(DtoCrop.from(cropById));
+  }
+
+  /**
+   * get crops between date.
+   */
+  @GetMapping("/search")
+  public ResponseEntity<List<DtoCrop>> getCropsByHarvestDate(
+      @RequestParam LocalDate start,
+      @RequestParam LocalDate end
+  ) {
+    List<Crop> crops = cropService.getCropsByHarvestDate(start, end);
+    return ResponseEntity.status(HttpStatus.OK).body(crops.stream().map(DtoCrop::from).toList());
   }
 }
