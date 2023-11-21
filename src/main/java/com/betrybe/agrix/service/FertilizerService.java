@@ -2,10 +2,11 @@ package com.betrybe.agrix.service;
 
 import com.betrybe.agrix.entities.Fertilizer;
 import com.betrybe.agrix.repositories.RepoFertilizer;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+
 
 /**
  * Fertilizer service.
