@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -38,23 +37,11 @@ public class CropController {
   }
 
   /**
-   * GetCropById.
+   * get crop by id.
    */
   @GetMapping("/{id}")
   public ResponseEntity<DtoCrop> getCropById(@PathVariable int id) {
     Crop cropById = cropService.getCropById(id);
     return ResponseEntity.status(HttpStatus.OK).body(DtoCrop.from(cropById));
-  }
-
-  /**
-   * GetCropsByDate.
-   */
-  @GetMapping("/search")
-  public ResponseEntity<List<DtoCrop>> getCropsByHarvestDate(
-      @RequestParam LocalDate start,
-      @RequestParam LocalDate end
-  ) {
-    List<Crop> crops = cropService.getCropsByHarvestDate(start, end);
-    return ResponseEntity.status(HttpStatus.OK).body(crops.stream().map(DtoCrop::from).toList());
   }
 }
