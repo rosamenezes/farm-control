@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -43,5 +44,17 @@ public class CropController {
   public ResponseEntity<DtoCrop> getCropById(@PathVariable int id) {
     Crop cropById = cropService.getCropById(id);
     return ResponseEntity.status(HttpStatus.OK).body(DtoCrop.from(cropById));
+  }
+
+  /**
+   * find crops by harvest date between.
+   */
+  @GetMapping("/search")
+  public ResponseEntity<List<DtoCrop>> searchCropsByHarvestDate(
+      @RequestParam LocalDate start,
+      @RequestParam LocalDate end
+  ) {
+    List<Crop> crops = cropService.searchCropsByHarvestDate(start, end);
+    return ResponseEntity.status(HttpStatus.OK).body(crops.stream().map(DtoCrop::from).toList());
   }
 }
