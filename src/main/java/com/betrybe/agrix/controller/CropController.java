@@ -38,7 +38,7 @@ public class CropController {
   }
 
   /**
-   * get crop by id.
+   * GetCropById.
    */
   @GetMapping("/{id}")
   public ResponseEntity<DtoCrop> getCropById(@PathVariable int id) {
@@ -47,7 +47,7 @@ public class CropController {
   }
 
   /**
-   * get crops between date.
+   * GetCropsByDate.
    */
   @GetMapping("/search")
   public ResponseEntity<List<DtoCrop>> getCropsByHarvestDate(

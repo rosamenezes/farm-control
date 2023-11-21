@@ -45,6 +45,7 @@ public class Crop {
   public int getId() {
     return id;
   }
+
   public void setId(int id) {
     this.id = id;
   }
@@ -52,6 +53,7 @@ public class Crop {
   public Farm getFarm() {
     return farm;
   }
+
   public void setFarm(Farm farm) {
     this.farm = farm;
   }
@@ -59,6 +61,7 @@ public class Crop {
   public String getName() {
     return name;
   }
+
   public void setName(String name) {
     this.name = name;
   }
@@ -66,6 +69,7 @@ public class Crop {
   public Double getPlantedArea() {
     return plantedArea;
   }
+
   public void setPlantedArea(Double plantedArea) {
     this.plantedArea = plantedArea;
   }
