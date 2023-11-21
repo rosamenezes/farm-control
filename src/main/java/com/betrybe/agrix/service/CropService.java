@@ -43,6 +43,6 @@ public class CropService {
   }
 
   public List<Crop> getCropsByHarvestDate(LocalDate start, LocalDate end) {
-    return repoCrop.getByHarvestDate(start, end);
+    return repoCrop.getCropsByHarvestDate(start, end);
   }
 }

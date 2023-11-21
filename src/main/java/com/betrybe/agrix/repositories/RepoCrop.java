@@ -12,5 +12,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface RepoCrop extends JpaRepository<Crop, Integer> {
-  List<Crop> getByHarvestDate(LocalDate start, LocalDate end);
+  List<Crop> getCropsByHarvestDate(LocalDate start, LocalDate end);
 }
